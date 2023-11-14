@@ -8,6 +8,11 @@ namespace SpriteKind {
     export const Wall = SpriteKind.create()
     export const Player2 = SpriteKind.create()
 }
+controller.player1.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Released, function () {
+    timer.after(100, function () {
+        animation.stopAnimation(animation.AnimationTypes.All, player1Sprite)
+    })
+})
 function AddWalls2 (bool: boolean) {
     Wally = 80
     if (bool) {
@@ -37,6 +42,11 @@ function AddWalls2 (bool: boolean) {
 controller.player1.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
     player1Sprite.y += -5
     animation.setAction(player1Sprite, ActionKind.Jumping)
+})
+controller.player1.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Released, function () {
+    timer.after(100, function () {
+        animation.stopAnimation(animation.AnimationTypes.All, player1Sprite)
+    })
 })
 function setUpPlayer2 () {
     animationTimer = 250
@@ -304,6 +314,21 @@ function setUpPlayer1 () {
         `)
     animation.attachAnimation(player1Sprite, anim)
 }
+controller.player2.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Released, function () {
+    timer.after(100, function () {
+        animation.stopAnimation(animation.AnimationTypes.All, player2Sprite)
+    })
+})
+controller.player2.onButtonEvent(ControllerButton.Down, ControllerButtonEvent.Released, function () {
+    timer.after(100, function () {
+        animation.stopAnimation(animation.AnimationTypes.All, player2Sprite)
+    })
+})
+controller.player2.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Released, function () {
+    timer.after(100, function () {
+        animation.stopAnimation(animation.AnimationTypes.All, player2Sprite)
+    })
+})
 function SetUpAnimations () {
     setUpPlayer1()
     setUpPlayer2()
@@ -362,6 +387,11 @@ controller.player2.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.P
     player2Sprite.x += 5
     animation.setAction(player2Sprite, ActionKind.Jumping)
 })
+controller.player1.onButtonEvent(ControllerButton.Down, ControllerButtonEvent.Released, function () {
+    timer.after(100, function () {
+        animation.stopAnimation(animation.AnimationTypes.All, player1Sprite)
+    })
+})
 controller.player2.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Pressed, function () {
     player2Sprite.x += -5
     animation.setAction(player2Sprite, ActionKind.Jumping)
@@ -372,6 +402,16 @@ sprites.onOverlap(SpriteKind.Player2, SpriteKind.Wall, function (sprite, otherSp
 controller.player1.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.Pressed, function () {
     player1Sprite.x += 5
     animation.setAction(player1Sprite, ActionKind.Jumping)
+})
+controller.player2.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.Released, function () {
+    timer.after(100, function () {
+        animation.stopAnimation(animation.AnimationTypes.All, player2Sprite)
+    })
+})
+controller.player1.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.Released, function () {
+    timer.after(100, function () {
+        animation.stopAnimation(animation.AnimationTypes.All, player1Sprite)
+    })
 })
 controller.player1.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Pressed, function () {
     player1Sprite.x += -5
