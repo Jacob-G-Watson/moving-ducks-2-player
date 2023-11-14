@@ -6,11 +6,12 @@ enum ActionKind {
 namespace SpriteKind {
     export const Gap = SpriteKind.create()
     export const Wall = SpriteKind.create()
+    export const Player2 = SpriteKind.create()
 }
 function AddWalls2 (bool: boolean) {
     Wally = 80
     if (bool) {
-        for (let index = 0; index <= 2; index++) {
+        for (let index = 0; index <= 5; index++) {
             Wall1 = sprites.create(img`
                 . . . . . . . . . . . . . . . . 
                 . . . . . . 7 . . . . . . . . . 
@@ -29,12 +30,12 @@ function AddWalls2 (bool: boolean) {
                 . . . . . 7 7 7 . . . . . . . . 
                 . . . . . 7 7 7 . . . . . . . . 
                 `, SpriteKind.Wall)
-            Wall1.setPosition(index * 20 + 40, Wally)
+            Wall1.setPosition(Wally, index * 20 + 20)
         }
     }
 }
 controller.player1.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
-    player1Sprite.y += -2
+    player1Sprite.y += -5
     animation.setAction(player1Sprite, ActionKind.Jumping)
 })
 function setUpPlayer2 () {
@@ -56,7 +57,7 @@ function setUpPlayer2 () {
         . c d d d d d d 3 3 3 3 3 d b . 
         . . c b d d d d d 3 3 3 b b . . 
         . . . c c c c c c c c b b . . . 
-        `, SpriteKind.Player)
+        `, SpriteKind.Player2)
     anim = animation.createAnimation(ActionKind.Jumping, 25)
     anim.addAnimationFrame(img`
         . . . . . . . . . . . . . . . . 
@@ -169,7 +170,7 @@ function setUpPlayer2 () {
     animation.attachAnimation(player2Sprite, anim)
 }
 controller.player2.onButtonEvent(ControllerButton.Down, ControllerButtonEvent.Pressed, function () {
-    player2Sprite.y += 2
+    player2Sprite.y += 5
     animation.setAction(player2Sprite, ActionKind.Jumping)
 })
 function setUpPlayer1 () {
@@ -308,30 +309,11 @@ function SetUpAnimations () {
     setUpPlayer2()
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Wall, function (sprite, otherSprite) {
-    player1Sprite.setPosition(73, 112)
+    player1Sprite.setPosition(120, 120)
 })
 function AddWalls (bool: boolean) {
-    Wally = 60
+    Wallx = 40
     if (bool) {
-        Wall1 = sprites.create(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . 7 . . . . . . . . . 
-            . . . . . 7 7 7 . . . . . . . . 
-            . . . . . 7 7 7 . . . . . . . . 
-            . . . . . 7 7 7 . . . . . . . . 
-            . . . . . 7 7 7 . . 7 . . . . . 
-            . . . . . 7 7 7 . 7 7 7 . . . . 
-            . . 7 . . 7 7 7 . 7 7 7 . . . . 
-            . 7 7 7 . 7 7 7 . 7 7 7 . . . . 
-            . 7 7 7 . 7 7 7 . 7 7 7 . . . . 
-            . 7 7 7 . 7 7 7 7 7 7 7 . . . . 
-            . 7 7 7 7 7 7 7 7 7 7 . . . . . 
-            . . 7 7 7 7 7 7 . . . . . . . . 
-            . . . . . 7 7 7 . . . . . . . . 
-            . . . . . 7 7 7 . . . . . . . . 
-            . . . . . 7 7 7 . . . . . . . . 
-            `, SpriteKind.Wall)
-        Wall1.setPosition(40, Wally)
         Wall2 = sprites.create(img`
             . . . . . . . . . . . . . . . . 
             . . . . . . 7 . . . . . . . . . 
@@ -350,7 +332,7 @@ function AddWalls (bool: boolean) {
             . . . . . 7 7 7 . . . . . . . . 
             . . . . . 7 7 7 . . . . . . . . 
             `, SpriteKind.Wall)
-        Wall2.setPosition(60, Wally)
+        Wall2.setPosition(120, 60)
         Wall3 = sprites.create(img`
             . . . . . . . . . . . . . . . . 
             . . . . . . 7 . . . . . . . . . 
@@ -369,35 +351,39 @@ function AddWalls (bool: boolean) {
             . . . . . 7 7 7 . . . . . . . . 
             . . . . . 7 7 7 . . . . . . . . 
             `, SpriteKind.Wall)
-        Wall3.setPosition(80, Wally)
+        Wall3.setPosition(40, 60)
     }
 }
 controller.player2.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
-    player2Sprite.y += -20
+    player2Sprite.y += -5
     animation.setAction(player2Sprite, ActionKind.Jumping)
 })
 controller.player2.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.Pressed, function () {
-    player2Sprite.x += 2
+    player2Sprite.x += 5
     animation.setAction(player2Sprite, ActionKind.Jumping)
 })
 controller.player2.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Pressed, function () {
-    player2Sprite.x += -2
+    player2Sprite.x += -5
     animation.setAction(player2Sprite, ActionKind.Jumping)
 })
+sprites.onOverlap(SpriteKind.Player2, SpriteKind.Wall, function (sprite, otherSprite) {
+    player2Sprite.setPosition(40, 120)
+})
 controller.player1.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.Pressed, function () {
-    player1Sprite.x += 2
+    player1Sprite.x += 5
     animation.setAction(player1Sprite, ActionKind.Jumping)
 })
 controller.player1.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Pressed, function () {
-    player1Sprite.x += -2
+    player1Sprite.x += -5
     animation.setAction(player1Sprite, ActionKind.Jumping)
 })
 controller.player1.onButtonEvent(ControllerButton.Down, ControllerButtonEvent.Pressed, function () {
-    player1Sprite.y += 2
+    player1Sprite.y += 5
     animation.setAction(player1Sprite, ActionKind.Jumping)
 })
 let Wall3: Sprite = null
 let Wall2: Sprite = null
+let Wallx = 0
 let anim: animation.Animation = null
 let animationTimer = 0
 let Wall1: Sprite = null
@@ -405,13 +391,12 @@ let Wally = 0
 let player2Sprite: Sprite = null
 let player1Sprite: Sprite = null
 scene.setBackgroundColor(9)
-info.setScore(0)
 effects.blizzard.startScreenEffect()
 SetUpAnimations()
 player1Sprite.setPosition(120, 120)
 player2Sprite.setPosition(40, 120)
-AddWalls2(false)
-AddWalls(false)
+AddWalls2(true)
+AddWalls(true)
 scene.setBackgroundImage(img`
     99999999999999999999999999999999999999999999999999999999999999999999fff99999fff999999999999999999999999999999999999999999999999999999999999999999999999999999999
     9999999999999999999999999999999999999ffffffffff9999fff99999999999999fff99999fff99999999ffffffff99999999999999999999999999999999999999999999999999999999999999999
@@ -535,11 +520,13 @@ scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     `)
 game.onUpdate(function () {
-    if (player1Sprite.top < 0) {
-        game.over(true)
+    if (player1Sprite.top < 8) {
+        game.setGameOverMessage(true, "YELLOW DUCK WINS")
+        game.gameOver(true)
     }
-    if (player2Sprite.top < 0) {
-        game.over(true)
+    if (player2Sprite.top < 8) {
+        game.setGameOverMessage(true, "PINK DUCK WINS")
+        game.gameOver(true)
     }
     if (player1Sprite.bottom > 120) {
         player1Sprite.y += -10
